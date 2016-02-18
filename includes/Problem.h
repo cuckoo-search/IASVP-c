@@ -154,8 +154,7 @@ void Problem::checkBounds(uint pos) {
         if (std::isnan(solution[pos])) {
             solution[pos] = (std::signbit(solution[pos]) ? lb : ub);
         } else {
-            solution[pos] = (std::isless(solution[pos], lb) ? lb : solution[pos]);
-            solution[pos] = (std::isgreater(solution[pos], ub) ? ub : solution[pos]);
+            solution[pos] = std::fmax(std::fmin(solution[pos], ub), lb);
         }
     }
 }
